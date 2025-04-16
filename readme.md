@@ -29,3 +29,15 @@ GRANT, REVOKE.
     ``` it is used to manage transactions done in the Database ```
 
 SMART TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT.
+
+
+
+
+# Famus Interview Questions
+
+1. Can we use SELECT keyword without using FROM clause?
+
+Ans ``` yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables ```
+
+Example ``` SELECT 55+11, SELECT now(), SELECT ucase(); ``` etc
+            
