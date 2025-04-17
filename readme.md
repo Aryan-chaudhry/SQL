@@ -59,7 +59,6 @@ Queries like these -->  DQL > dataGrouping.sql
 
     Ans it act like DISTINCT function 
 
-
-
+HAVING CLAUSE
 
     Note HAVING is always used with GROUP BY
