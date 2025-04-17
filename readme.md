@@ -42,9 +42,11 @@ Ans ``` yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, hel
 Example ``` SELECT 55+11, SELECT now(), SELECT ucase(), SELECT lcase(); ``` etc
 
 
-2. Find the employee in the table whose name contain character 'V'
+2. Find the employee in the table whose name contain character 'V' **(Important)
 
     ``` Hint  pattern Searching ```
 
-Ans  DQL > Pattern_Searching.sql
+Queries like these -->   DQL > Pattern_Searching.sql
+
+
 ![Answer](image.png)

@@ -11,3 +11,10 @@ SELECT * FROM WORKER WHERE LAST_NAME LIKE '%h';
 
 -- Give Employee Detail first name first character is 'M' and last name first character is 'A'
 SELECT * FROM Worker WHERE FIRST_NAME LIKE 'M%' AND LAST_NAME LIKE 'A%';
+
+-- Give Emplyee detail whose first name second charcter is 'o'
+SELECT * FROM Worker WHERE FIRST_NAME LIKE '_o%';
+
+-- Give Emplyee detail whose first name second last character is 'e'
+
+SELECT * FROM Worker WHERE FIRST_NAME LIKE '%e_';
