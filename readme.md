@@ -39,5 +39,5 @@
 
 Ans ``` yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables ```
 
-Example ``` SELECT 55+11, SELECT now(), SELECT ucase(); ``` etc
+Example ``` SELECT 55+11, SELECT now(), SELECT ucase(), SELECT lcase(); ``` etc
             
