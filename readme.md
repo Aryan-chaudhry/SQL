@@ -47,6 +47,3 @@ Example ``` SELECT 55+11, SELECT now(), SELECT ucase(), SELECT lcase(); ``` etc
     Hint  pattern Searching 
 
 Queries like these -->   DQL > Pattern_Searching.sql
-
-
-![Answer](image.png)
