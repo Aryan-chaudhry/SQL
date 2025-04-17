@@ -61,4 +61,4 @@ Queries like these -->  DQL > dataGrouping.sql
 
 HAVING CLAUSE
 
-    Note HAVING is always used with GROUP BY
+    Note HAVING is always used with GROUP BY, it is similar to where (not equal)
