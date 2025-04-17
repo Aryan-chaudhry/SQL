@@ -35,16 +35,16 @@
 
 # Famus Interview Questions
 
-1. Can we use SELECT keyword without using FROM clause?
+``` 1.  Can we use SELECT keyword without using FROM clause? ```
 
-Ans ``` yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables ```
+Ans yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables 
 
 Example ``` SELECT 55+11, SELECT now(), SELECT ucase(), SELECT lcase(); ``` etc
 
 
-2. Find the employee in the table whose name contain character 'V' **(Important)
+``` 2. Find the employee in the table whose name contain character 'V' **(Important)```
 
-    ``` Hint  pattern Searching ```
+    Hint  pattern Searching 
 
 Queries like these -->   DQL > Pattern_Searching.sql
 
