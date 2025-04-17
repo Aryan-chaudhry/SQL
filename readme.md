@@ -35,7 +35,7 @@
 
 # Famus Interview Questions
 
-``` 1.  Can we use SELECT keyword without using FROM clause? ```
+``` 1. Can we use SELECT keyword without using FROM clause? ```
 
 Ans yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables 
 
@@ -47,3 +47,9 @@ Example ``` SELECT 55+11, SELECT now(), SELECT ucase(), SELECT lcase(); ``` etc
     Hint  pattern Searching 
 
 Queries like these -->   DQL > Pattern_Searching.sql
+
+``` 3. Find Average salary per Department ```
+
+    Hint  Data Grouping 
+
+Queries like this:  DQL > dataGrouping.sql
