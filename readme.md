@@ -55,6 +55,8 @@ Queries like these -->   DQL > Pattern_Searching.sql
 Queries like these -->  DQL > dataGrouping.sql
 
     
- ``` what if i want to do make a group but without aggregation function```
+ ``` what if i want to do make a group but without aggregation function ? ```
 
-    Ans it act like DISTINCT FUNCTION
+    Ans it act like DISTINCT function 
+
+    Note HAVING is always used with GROUP BY
