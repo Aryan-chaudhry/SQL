@@ -52,3 +52,4 @@ INSERT INTO Profile
     ("Khan Sahab", 1400000, 15);
 
 SELECT * FROM Profile;
+
