@@ -23,3 +23,23 @@ INSERT INTO Customer
 
     -- Give a person DETAIL whose live in Karnal
     SELECT * FROM Customer WHERE CITY = 'KARNAL';
+
+    CREATE TABLE Order_Detail(
+        ORDER_ID INTEGER PRIMARY KEY,
+        PRODUCT_NAME VARCHAR(225),
+        DELIVERY_DATE DATE,
+        CUSTOMER_ID INT,
+        Foreign Key (CUSTOMER_ID) REFERENCES Customer(id),
+        PRICE INTEGER
+    );
+
+    INSERT INTO Order_Detail
+        (order_id, product_name, delivery_date, customer_id, price) VALUES
+        (121, "Headphone", '22-04-25', 1, 1500),
+        (123, "Bhagwat Geeta Book", '18-04-25', 3, 2400),
+        (124, "SSC PYQ BOOK", '21-04-25', 2, 350);
+
+SELECT * FROM Order_detail;
+
+-- Give the Person detail whose order id is 121 
+ 
