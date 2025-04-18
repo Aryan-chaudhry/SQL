@@ -41,4 +41,18 @@ SET SQL_SAFE_UPDATES = 1;
 DELETE FROM My_Profile WHERE Profile_name = "Gaming Rox"
 
 -- delete content
--- on delete cascase , on delete null
+-- on delete cascase , on delete set null
+
+
+-- REPLACE 
+-- if data present than replace it
+-- else it act like an insert command
+
+REPLACE INTO My_Profile (Profile_name, followings, followers)
+    VALUES ("Rahul", 0, 0);
+
+SELECT * FROM MY_Profile;
+
+REPLACE INTO MY_Profile SET Profile_name = "Rahul saini", followings = 0, followers = 123
+
+DELETE FROM My_Profile WHERE Profile_name = "RAHUL" OR Profile_name = "Rahul Saini"

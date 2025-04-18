@@ -37,7 +37,7 @@
 
 ``` 1. Can we use SELECT keyword without using FROM clause? ```
 
-Ans yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables 
+Ans: yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables 
 
 Example ``` SELECT 55+11, SELECT now(), SELECT ucase(), SELECT lcase(); ``` etc
 
@@ -57,7 +57,7 @@ Queries like these -->  DQL > dataGrouping.sql
     
  ``` what if i want to do make a group but without aggregation function ? ```
 
-    Ans it act like DISTINCT function 
+    Ans: it act like DISTINCT function 
 
 HAVING CLAUSE
 
@@ -65,9 +65,13 @@ HAVING CLAUSE
 
 ``` 4. Can Forign key have null value ```
 
-Ans Yes if we have use ``` ON DELETE SET NULL ``` 
+Ans:  Yes, if we use ``` ON DELETE SET NULL ``` then forign key can contain null value
 
 
 ON DELETE CASCASE :- ``` if i delete a value from a parent table than the corrosponding value present inside a child table also get deleted ```
 
 ON DELETE SET NULL :- ``` if i delete a value from a parent table than the corrosponding  value present inside a child table it foreign key get NULL ```
+
+``` 5. Replace vs Update ```
+
+    Hint : if row is not present REPLACE will add a new row while UPDATE do nothing

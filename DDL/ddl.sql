@@ -29,7 +29,7 @@ INSERT INTO Customer
         PRODUCT_NAME VARCHAR(225),
         DELIVERY_DATE DATE,
         CUSTOMER_ID INT,
-        Foreign Key (CUSTOMER_ID) REFERENCES Customer(id),
+        Foreign Key (CUSTOMER_ID) REFERENCES Customer(id) ON DELETE SET NULL,
         PRICE INTEGER
     );
 
@@ -37,9 +37,18 @@ INSERT INTO Customer
         (order_id, product_name, delivery_date, customer_id, price) VALUES
         (121, "Headphone", '22-04-25', 1, 1500),
         (123, "Bhagwat Geeta Book", '18-04-25', 3, 2400),
-        (124, "SSC PYQ BOOK", '21-04-25', 2, 350);
+        (124, "SSC PYQ BOOK", '21-04-25', 2, 350),
+        (127, "C type Charger", "21-04-25", 5, 1200);
+
 
 SELECT * FROM Order_detail;
 
+-- intigrity constratin
+DELETE FROM Customer WHERE id = 5;
+
+DROP TABLE Order_detail;
 -- Give the Person detail whose order id is 121 
  
+-- update table data
+
+UPDATE Customer SET ADDRESS = "Danialpur, Karnal, Haryana" WHERE id = 2
