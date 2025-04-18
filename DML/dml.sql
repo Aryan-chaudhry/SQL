@@ -40,4 +40,5 @@ SET SQL_SAFE_UPDATES = 1;
 -- delete 
 DELETE FROM My_Profile WHERE Profile_name = "Gaming Rox"
 
+-- delete content
 -- on delete cascase , on delete null

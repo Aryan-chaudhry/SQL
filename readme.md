@@ -62,3 +62,12 @@ Queries like these -->  DQL > dataGrouping.sql
 HAVING CLAUSE
 
     Note HAVING is always used with GROUP BY, it is similar to where (not equal)
+
+``` 4. Can Forign key have null value ```
+
+Ans Yes if we have use ``` ON DELETE SET NULL ``` 
+
+
+ON DELETE CASCASE :- ``` if i delete a value from a parent table than the corrosponding value present inside a child table also get deleted ```
+
+ON DELETE SET NULL :- ``` if i delete a value from a parent table than the corrosponding  value present inside a child table it foreign key get NULL ```
