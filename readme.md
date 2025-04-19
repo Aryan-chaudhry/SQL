@@ -80,7 +80,7 @@ ON DELETE SET NULL :- ``` if i delete a value from a parent table than the corro
 
     Note:- To apply joins, there should be common attributes in both tha table
 
-## INNER JOIN
+### INNER JOIN
 
 Syntax
 
