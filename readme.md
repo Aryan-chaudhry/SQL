@@ -1,100 +1,194 @@
-## Types of command
 
-1. DDL (Data defination language)
+# 📘 SQL Commands & Concepts Cheat Sheet
 
-    ``` it define relation schema```
+This guide includes categorized SQL command types, key concepts, and commonly asked interview questions with code examples. Perfect for revision or interview preparation!
 
-    --> CREATE, ALTER TABLE, DROP, TRUNCATE, RENAME.
+---
 
-2. DRL/DQL (Data retriival language/ data query language)
+## 📂 Types of SQL Commands
 
-    ``` it is used to retrieve data from Database```
+### 1. **DDL** – *Data Definition Language*
+> Used to define and manage database schema.
 
-    --> SELECT.
+- `CREATE` – Create new tables/databases
+- `ALTER` – Modify existing schema
+- `DROP` – Remove database objects
+- `TRUNCATE` – Delete all rows from a table
+- `RENAME` – Rename database objects
 
-3. DML (Data Modification Language)
+---
 
-    ``` it is used to perform modification in the Database ```
+### 2. **DQL / DRL** – *Data Query / Retrieval Language*
+> Used to fetch/query data from a database.
 
-    --> INSERT, UPDATE, DELETE
+- `SELECT` – Retrieve records from one or more tables
 
-4. DCL (Data Control Language)
+---
 
-    ``` it is used to grant or revoke authorities from user ```
+### 3. **DML** – *Data Manipulation Language*
+> Used for managing data within schema objects.
 
-    --> GRANT, REVOKE.
+- `INSERT` – Add new data
+- `UPDATE` – Modify existing data
+- `DELETE` – Remove data
 
-5. TCL (Transaction control Language)
+---
 
-    ``` it is used to manage transactions done in the Database ```
+### 4. **DCL** – *Data Control Language*
+> Manage access rights and permissions.
 
-    --> SMART TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT.
+- `GRANT` – Give access rights
+- `REVOKE` – Remove access rights
 
+---
 
+### 5. **TCL** – *Transaction Control Language*
+> Manage transactions in SQL.
 
+- `COMMIT` – Save changes permanently
+- `ROLLBACK` – Undo changes
+- `SAVEPOINT` – Set a point to rollback to
+- `SET TRANSACTION` – Define transaction characteristics
 
-# Famus Interview Questions
+---
 
-``` 1. Can we use SELECT keyword without using FROM clause? ```
+## 🧠 Popular Interview Questions
 
-Ans: yes, Using DUAL Table, Dual table are dummy tables created by MYSQL, help user to do certain obvious actionswithout referring to user defined tables 
+### 1. Can we use `SELECT` without a `FROM` clause?
 
-Example ``` SELECT 55+11, SELECT now(), SELECT ucase(), SELECT lcase(); ``` etc
+✅ **Yes**, using the dummy **DUAL** table (in MySQL, Oracle).
 
+```sql
+SELECT 55 + 11;
+SELECT NOW();
+SELECT UCASE('hello');
+```
 
-``` 2. Find the employee in the table whose name contain character 'V' **(Important)```
+---
 
-    Hint  pattern Searching 
+### 2. 🔍 Find employees whose names contain character 'V'
 
-Queries like these -->   DQL > Pattern_Searching.sql
+📌 *Pattern Searching*
 
-``` 3. Find Average salary per Department ```
+```sql
+SELECT * FROM employees WHERE name LIKE '%V%';
+```
 
-    Hint  Data Grouping 
+📁 See: `DQL > Pattern_Searching.sql`
 
-Queries like these -->  DQL > dataGrouping.sql
+---
 
-    
- ``` what if i want to do make a group but without aggregation function ? ```
+### 3. 📊 Find average salary per department
 
-    Ans: it act like DISTINCT function 
+📌 *Data Grouping using `GROUP BY`*
 
-HAVING CLAUSE
+```sql
+SELECT department, AVG(salary) AS avg_salary 
+FROM employees 
+GROUP BY department;
+```
 
-    Note HAVING is always used with GROUP BY, it is similar to where (not equal)
+📁 See: `DQL > dataGrouping.sql`
 
-``` 4. Can Forign key have null value ```
+❓ *Can I group without aggregation functions?*  
+Yes – it works similarly to `DISTINCT`.
 
-Ans:  Yes, if we use ``` ON DELETE SET NULL ``` then forign key can contain null value
+---
 
+### 4. Can a **Foreign Key** have `NULL` values?
 
-ON DELETE CASCASE :- ``` if i delete a value from a parent table than the corrosponding value present inside a child table also get deleted ```
+✅ **Yes**, especially when using:
 
-ON DELETE SET NULL :- ``` if i delete a value from a parent table than the corrosponding  value present inside a child table it foreign key get NULL ```
+- `ON DELETE SET NULL` → Sets foreign key to `NULL` if parent is deleted.
+- `ON DELETE CASCADE` → Deletes matching child rows when parent is deleted.
 
-``` 5. Replace vs Update ```
+---
 
-    Hint : if row is not present REPLACE will add a new row while UPDATE do nothing
+### 5. 🆚 `REPLACE` vs `UPDATE`
 
-### JOINS
+- `REPLACE`: Adds a new row if not found, otherwise deletes and inserts.
+- `UPDATE`: Only modifies existing rows.
 
-    Note:- To apply joins, there should be common attributes in both tha table
+---
 
-#### INNER JOIN
+## 🔗 SQL Joins
 
-Syntax
+> Joins are used to combine rows from two or more tables based on related columns.
 
-``` SELECT column-list FROM table1 INNER JOIN table2 condition ```
+---
 
+### 🔹 INNER JOIN
 
-#### OUTER JOIN
+```sql
+SELECT emp.name, dept.name 
+FROM employees AS emp 
+INNER JOIN departments AS dept 
+ON emp.dept_id = dept.id;
+```
 
-1. LEFT JOIN    Syntax:- ``` SELECT columns FROM table LEFT JOIN table2 ON Join_condition ```
+---
 
-2. RIGHT JOIN   Syntax:- ``` SELECT columns FROM table RIGHT JOIN table2 ON Join_condition ```
+### 🔸 LEFT JOIN
 
-3. FULL JOIN    Syntax:- ``` SELECT columns FROM table1 as t1 Right JOIN tabe2 as t2 ON t1.id UNION Select columns FROM table1 as t1 RIGHT JOIN table2 as t2 ON t1.id = t2.d```
+```sql
+SELECT emp.name, dept.name 
+FROM employees AS emp 
+LEFT JOIN departments AS dept 
+ON emp.dept_id = dept.id;
+```
 
-FULL JOIN is nothing but LEFT JOIN UNION RIGHT JOIN
+---
 
+### 🔸 RIGHT JOIN
 
+```sql
+SELECT emp.name, dept.name 
+FROM employees AS emp 
+RIGHT JOIN departments AS dept 
+ON emp.dept_id = dept.id;
+```
+
+---
+
+### 🔸 FULL OUTER JOIN *(Simulated in MySQL with UNION)*
+
+```sql
+SELECT emp.name, dept.name 
+FROM employees AS emp 
+LEFT JOIN departments AS dept 
+ON emp.dept_id = dept.id
+
+UNION
+
+SELECT emp.name, dept.name 
+FROM employees AS emp 
+RIGHT JOIN departments AS dept 
+ON emp.dept_id = dept.id;
+```
+
+---
+
+## 🗂 Folder Structure Example
+
+```
+📦 SQL-Guide/
+├── 📁 DDL/
+│   └── createTables.sql
+├── 📁 DML/
+│   └── insertUpdateDelete.sql
+├── 📁 DQL/
+│   ├── patternSearching.sql
+│   └── dataGrouping.sql
+├── 📁 JOINS/
+│   └── innerOuterJoins.sql
+└── README.md ✅
+```
+
+---
+
+## 🙌 Tips for Interviews
+
+- Use aliases for readability.
+- Always explain your logic.
+- Know when to use `HAVING` vs `WHERE`.
+- Understand implications of `CASCADE` and `SET NULL`.
