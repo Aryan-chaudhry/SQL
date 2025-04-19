@@ -85,3 +85,16 @@ ON DELETE SET NULL :- ``` if i delete a value from a parent table than the corro
 Syntax
 
 ``` SELECT column-list FROM table1 INNER JOIN table2 condition ```
+
+
+#### OUTER JOIN
+
+1. LEFT JOIN    Syntax:- ``` SELECT columns FROM table LEFT JOIN table2 ON Join_condition ```
+
+2. RIGHT JOIN   Syntax:- ``` SELECT columns FROM table RIGHT JOIN table2 ON Join_condition ```
+
+3. FULL JOIN    Syntax:- ``` SELECT columns FROM table1 as t1 Right JOIN tabe2 as t2 ON t1.id UNION Select columns FROM table1 as t1 RIGHT JOIN table2 as t2 ON t1.id = t2.d```
+
+FULL JOIN is nothing but LEFT JOIN UNION RIGHT JOIN
+
+
