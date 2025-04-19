@@ -1,5 +1,5 @@
 
-# 📘 SQL Commands & Concepts Cheat Sheet
+# 📘 SQL Commands & Concepts
 
 This guide includes categorized SQL command types, key concepts, and commonly asked interview questions with code examples. Perfect for revision or interview preparation!
 
