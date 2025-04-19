@@ -75,3 +75,13 @@ ON DELETE SET NULL :- ``` if i delete a value from a parent table than the corro
 ``` 5. Replace vs Update ```
 
     Hint : if row is not present REPLACE will add a new row while UPDATE do nothing
+
+### JOINS
+
+    Note:- To apply joins, there should be common attributes in both tha table
+
+## INNER JOIN
+
+Syntax
+
+``` SELECT column-list FROM table1 INNER JOIN table2 condition ```
