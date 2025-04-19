@@ -168,27 +168,22 @@ ON emp.dept_id = dept.id;
 
 ---
 
-## 🗂 Folder Structure Example
+### 🔸 CROSS JOIN
 
-```
-📦 SQL-Guide/
-├── 📁 DDL/
-│   └── createTables.sql
-├── 📁 DML/
-│   └── insertUpdateDelete.sql
-├── 📁 DQL/
-│   ├── patternSearching.sql
-│   └── dataGrouping.sql
-├── 📁 JOINS/
-│   └── innerOuterJoins.sql
-└── README.md ✅
-```
+```sql
+SELECT emp.name, dept.name 
+FROM employees AS emp 
+CROSS JOIN departments AS dept;
+``` 
 
 ---
 
-## 🙌 Tips for Interviews
+### 🔸 SELF JOIN
 
-- Use aliases for readability.
-- Always explain your logic.
-- Know when to use `HAVING` vs `WHERE`.
-- Understand implications of `CASCADE` and `SET NULL`.
+```sql
+SELECT A.name AS Employee, B.name AS Manager 
+FROM employees AS A
+JOIN employees AS B 
+ON A.manager_id = B.id;
+```
+
