@@ -45,3 +45,13 @@ SELECT e.Employee_id , e.name, p.Project_id, p.Project_name FROM Employee AS e
  --OR
 
  SELECT Employee_id, name, Project_id, Project_name FROM Employee INNER JOIN Project ON Employee_id = customer_id;
+
+ -- Enlist customer name with project name assign to them
+
+ SELECT name , Project_name FROM Employee INNER JOIN Project ON Employee_id = customer_id;
+
+-- LEFT JOIN 
+
+-- fetch out each project assign to each employee
+
+SELECT * FROM Employee LEFT JOIN Project ON Employee_id = customer_id;
