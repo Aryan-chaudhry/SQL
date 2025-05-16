@@ -55,3 +55,9 @@ SELECT e.Employee_id , e.name, p.Project_id, p.Project_name FROM Employee AS e
 -- fetch out each project assign to each employee
 
 SELECT * FROM Employee LEFT JOIN Project ON Employee_id = customer_id;
+
+-- RIGHT JOIN 
+
+-- list all the project along eith employee name and their respected email id
+
+SELECT name, email FROM Employee RIGHT JOIN Project ON Employee_id = customer_id;
