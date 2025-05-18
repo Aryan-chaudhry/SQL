@@ -85,3 +85,27 @@ WHERE SALARY BETWEEN 100000 AND 500000
 SELECT * FROM Worker
 WHERE YEAR(joining_date) = 2014 AND MONTH(joining_date) = 02;
 
+-- Q-21. Write an SQL query to fetch the count of employees working in the department ‘Admin’.
+SELECT DEPARTMENT, COUNT(*) FROM Worker
+WHERE DEPARTMENT = 'Admin';
+
+-- Q-22. Write an SQL query to fetch worker full names with salaries >= 50000 and <= 100000.
+SELECT CONCAT(first_name, ' ', last_name), salary FROM Worker
+WHERE Salary >= 50000 AND Salary <= 100000;
+
+--OR
+
+SELECT CONCAT(first_name, ' ', last_name), salary FROM Worker
+WHERE Salary BETWEEN 50000 AND 100000;
+
+-- Q-23. Write an SQL query to fetch the no. of workers for each department in the descending order.
+SELECT Department, COUNT(worker_id) FROM Worker
+GROUP BY department ORDER BY department DESC;
+
+-- Q-24. Write an SQL query to print details of the Workers who are also Managers.
+
+select * from worker as w inner join title as t ON
+w.worker_id = t.worker_ref_id where t.worker_title = 'Manager';
+
+-- Q-25. Write an SQL query to fetch number (more than 1) of same titles in the ORG of different types.
+select worker_title, count(worker_ref_id) as count FROM title GROUP BY worker_title having count > 1;
