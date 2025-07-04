@@ -109,3 +109,97 @@ w.worker_id = t.worker_ref_id where t.worker_title = 'Manager';
 
 -- Q-25. Write an SQL query to fetch number (more than 1) of same titles in the ORG of different types.
 select worker_title, count(worker_ref_id) as count FROM title GROUP BY worker_title having count > 1;
+
+-- Q26. Write an SQL query to show only odd rows from a table
+select * from Worker where worker_id%2 <> 0;
+
+-- 27. Write an sql query to show only even rows from table
+select * from Worker Where mod(worker_id,2) = 0;
+
+--28. Write an SQL query to clone a new table from another table
+create table worker_clone like worker;
+insert into worker_clone select * from worker;
+select * from worker_clone;
+
+--29. write an sql query to fetch intersection records of two table
+select worker.* from worker inner join worker_clone using(worker_id);
+
+-- 30. write an sql query to show records from one table that another does not have
+select * from worker left join worker_clone using(worker_id) where worker_clone.worker_id is NULL;
+
+-- 31 Write an sql query to show the current date and time
+select curdate();
+select now();
+
+-- 32 write an sql query to show the top n(say 5) records of a table order by descending salary
+select * from worker order by salary desc limit 5;
+
+-- 33 write an sql query to determine the nth (say n =5) heightest salary from table
+select * from worker order by salary desc limit 4,1;
+-- 4 chorh kar 1st height salary 
+
+-- 34 write an sql query to determine 5th heighest salary without using limit keyword
+select salary from worker w1
+where 4 = (
+    select count(distinct(w2.salary))
+    from worker w2
+    where w2.salary >= w1.salary
+); 
+
+-- 35. write an sql query to fetch the list of employee with same salary.
+select * from worker w1, worker w2 where w1.salary = w2.salary and w1.worker_id != w2.worker_id;
+
+-- 36. write an sql command to fetch the 2nd heighest salary from table
+select * from worker order by salary desc limit 1,1;
+--OR
+select max(salary) from worker
+    where salary not in (select max (salary) from worker);
+
+-- 37 write an sql query to show one row twice in result from a table
+select * from worker
+UNION ALL
+select * from worker order by worker_id;
+
+-- 38 write an sql query to list worker_id who does not have any bonus
+select worker_id from worker where worker_id not in (select worker_ref_id from bonus);
+
+-- 39 write an sql query to fetch first 50% record of the table
+select * from worker where worker_id <= (select count(worker_id)/2 from worker);
+
+-- 40 write an sql query to fetch the department have less than 4 people in it
+select department, count(department) as deptCount from worker group by department having deptcount < 4;
+
+-- 41 write an sql query to show all department along with the number of people in there
+select department, count(department) as deptCount from worker group by department;
+
+-- 42 write an sql query to show the last record of the table
+select * from worker where worker_id = (select max(worker_id) from worker);
+
+-- 43 write an sql query to show the first record of the table
+select * from worker where worker_id = (select min(worker_id) from worker);
+
+-- 44 write an sql query to fetch the last five record from the table
+(select * from worker order by worker_id desc limit 5) order by worker_id
+
+-- 45 write an sql query to print the name of employee having the heighest salary in each department.
+select w.department, w.first_name, w.salary FROM 
+(select max(salary) as maxsal, department from worker group by department) temp
+inner join worker w on temp.department = w.department and temp.maxsal = w.salary;
+
+-- 46 write an sql query to fetch three max salary from table using co-related subquery
+select DISTINCT salary from worker w1
+where 3 >= (select count(distinct salary) from worker w2 where w1.salary <= w2.salary) order by w1.salary desc;
+
+-- 47 write an sql query to fetch three min salaries from table using co-related subquery
+select DISTINCT salary from worker w1
+where 3 >= (select count(distinct salary) from worker w2 where w1.salary >= w2.salary) order by w1.salary desc;
+
+-- 48 write an sql query to find the nth maximum salary from the table
+select DISTINCT salary from worker w1
+where n >= (select count(distinct salary) from worker w2 where w1.salary <= w2.salary) order by w1.salary desc;
+
+-- 49 write an sql query to fetch department along with the total samalries paid for each of them
+select department, sum(salary) as deptSal from worker group by department order by deptsal desc;;
+
+-- 50 write an sql query to fetch the name of worker who earn the heighest salary
+select first_name, salary from  worker where salary = (select max(salary) from worker);
