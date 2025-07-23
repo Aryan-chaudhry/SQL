@@ -1,4 +1,4 @@
-use ORG;
+  use ORG;
 
 -- add new column in profile table
 -- Syntax

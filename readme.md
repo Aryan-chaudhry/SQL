@@ -187,3 +187,52 @@ JOIN employees AS B
 ON A.manager_id = B.id;
 ```
 
+## Triggers
+
+### What is Triggers
+
+```
+A trigger is a set of SQL statements that automatically executes when a specific event (INSERT, UPDATE, DELETE) occurs on a table or view in the database.
+```
+
+### Type of Triggers Table
+```
+| 🔢 No | 🛠️ Trigger Type | 📂 Trigger Name          | 🧹 Drop Command                                  |
+| ----- | ---------------- | ------------------------ | ------------------------------------------------ |
+| 1     | BEFORE INSERT    | `before_insert_employee` | `DROP TRIGGER IF EXISTS before_insert_employee;` |
+| 2     | AFTER INSERT     | `after_insert_employee`  | `DROP TRIGGER IF EXISTS after_insert_employee;`  |
+| 3     | BEFORE UPDATE    | `before_update_employee` | `DROP TRIGGER IF EXISTS before_update_employee;` |
+| 4     | AFTER UPDATE     | `after_update_employee`  | `DROP TRIGGER IF EXISTS after_update_employee;`  |
+| 5     | BEFORE DELETE    | `before_delete_employee` | `DROP TRIGGER IF EXISTS before_delete_employee;` |
+| 6     | AFTER DELETE     | `after_delete_employee`  | `DROP TRIGGER IF EXISTS after_delete_employee;`  |
+
+```
+
+### syntax of Trigger
+
+```
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE}
+ON table_name
+FOR EACH ROW
+BEGIN
+   -- Trigger logic here
+END;
+```
+
+### common SQL States
+```
+
+| **Class** | **Meaning**                           | **Examples**                |
+| --------- | ------------------------------------- | --------------------------- |
+| `00`      | Successful completion                 | `00000` (success)           |
+| `01`      | Warning                               | `01000` (general warning)   |
+| `02`      | No data (not found)                   | `02000`                     |
+| `22`      | Data exception                        | `22003` (numeric overflow)  |
+| `23`      | Integrity constraint violation        | `23000` (foreign key fails) |
+| `28`      | Invalid authorization                 | `28000`                     |
+| `40`      | Transaction rollback                  | `40001` (deadlock)          |
+| `42`      | Syntax error or access rule violation | `42000` (syntax error)      |
+| `45`      | User-defined exception (MySQL)        | `45000` (used in `SIGNAL`)  |
+```
+
