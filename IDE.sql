@@ -1,112 +1,113 @@
+create database Jobboard;
 
-USE practice;
+use Jobboard;
 
-
-CREATE TABLE Location (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    longitude DOUBLE,
-    latitude DOUBLE,
-    name VARCHAR(100),
-    room_no VARCHAR(10),
-    dept_id INT,
-    location_count INT
+-- Create User table
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL CHECK (CHAR_LENGTH(password) >= 8),
+    role ENUM('candidate', 'recruiter') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Department (
-    department_id INT PRIMARY KEY AUTO_INCREMENT,
-    department_name VARCHAR(50),
-    working_hour INT,
-    location_id INT,
-    FOREIGN KEY (location_id) REFERENCES Location(id)
+-- Create Company table
+CREATE TABLE Companies (
+    company_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    website VARCHAR(255),
+    created_by INT,
+    FOREIGN KEY (created_by) REFERENCES Users(user_id) ON DELETE SET NULL
 );
 
-CREATE TABLE Incentive (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    incentive_amount BIGINT,
-    incentive_name VARCHAR(100)
+-- Create Category table
+CREATE TABLE Categories (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(50) NOT NULL UNIQUE
 );
 
-
-CREATE TABLE Vehicle (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    parking_id VARCHAR(50),
-    location_id INT,
-    vehicle_type VARCHAR(50),
-    FOREIGN KEY (location_id) REFERENCES Location(id)
+-- Create Job table
+CREATE TABLE Jobs (
+    job_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(150) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(100),
+    salary DECIMAL(10, 2),
+    job_type ENUM('full-time', 'part-time', 'contract', 'internship') NOT NULL,
+    posted_by INT,
+    company_id INT,
+    category_id INT,
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (posted_by) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (company_id) REFERENCES Companies(company_id),
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id)
 );
 
-CREATE TABLE Employee (
-    employee_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50),
-    department_id INT,
-    salary BIGINT,
-    insentive_id INT,
-    joining_date DATE,
-    DOB DATE,
-    vehicle_id VARCHAR(25),
-    FOREIGN KEY (department_id) REFERENCES Department(department_id),
-    FOREIGN KEY (insentive_id) REFERENCES Incentive(id)
+-- Create Applications table
+CREATE TABLE Applications (
+    application_id INT PRIMARY KEY AUTO_INCREMENT,
+    job_id INT NOT NULL,
+    user_id INT NOT NULL,
+    cover_letter TEXT,
+    resume_link VARCHAR(255),
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('applied', 'reviewing', 'interview', 'rejected', 'accepted') DEFAULT 'applied',
+    FOREIGN KEY (job_id) REFERENCES Jobs(job_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
-INSERT INTO Location (longitude, latitude, name, room_no, dept_id, location_count) VALUES
-(76.123, 28.456, 'Block A', 'A101', 1, 5),
-(77.321, 29.456, 'Block B', 'B202', 2, 3),
-(75.987, 27.789, 'Block C', 'C303', 3, 2),
-(78.100, 28.100, 'Block D', 'D404', 4, 6),
-(76.555, 29.111, 'Block E', 'E505', 5, 4),
-(75.111, 28.999, 'Block F', 'F606', 6, 1),
-(77.999, 28.777, 'Block G', 'G707', 7, 2);
+-- Insert sample categories
+INSERT INTO Categories (category_name) VALUES
+('Software Development'),
+('Marketing'),
+('Design'),
+('Data Science'),
+('Customer Support');
 
-update location set dept_id = null where dept_id = 6;
+-- Insert sample users
+-- Recruiters
+INSERT INTO Users (name, email, password, role) VALUES
+('Alice HR', 'alice@techcorp.com', 'StrongPass123', 'recruiter'),
+('John HR', 'john@designify.com', 'RecruitSecure987', 'recruiter');
 
-select * from location;
+-- Candidates
+INSERT INTO Users (name, email, password, role) VALUES
+('Bob Developer', 'bob.dev@example.com', 'CodeMaster2024', 'candidate'),
+('Sara Marketer', 'sara.mkt@example.com', 'MktGenius2025', 'candidate'),
+('Ethan Designer', 'ethan.design@example.com', 'Design!King', 'candidate');
 
+-- Insert companies
+INSERT INTO Companies (name, description, website, created_by) VALUES
+('TechCorp', 'Leading innovator in cloud software and enterprise tools.', 'https://www.techcorp.com', 1),
+('Designify', 'Creative design agency specializing in UI/UX.', 'https://www.designify.com', 2);
 
-INSERT INTO Department (department_name, working_hour, location_id) VALUES
-('CSE', 6, 1),
-('HR', 5, 2),
-('DCPD', 8, 3),
-('Marketing', 4, 4),
-('Emergency', 24, 5),
-('BA', 6, 6),
-('Admin', 9, 7);
+-- Insert jobs
+INSERT INTO Jobs (title, description, location, salary, job_type, posted_by, company_id, category_id) VALUES
+-- Job 1
+('Full Stack Developer', 
+'Looking for an experienced full stack developer proficient in React, Node.js, and MongoDB.', 
+'Remote', 120000, 'full-time', 1, 1, 1);
 
-INSERT INTO Incentive (incentive_amount, incentive_name) VALUES
-(5000, 'Bonus A'),
-(3000, 'Bonus B'),
-(1500, 'Bonus C'),
-(7000, 'Bonus D'),
-(2000, 'Bonus E'),
-(4000, 'Bonus F'),
-(1000, 'Bonus G'),
-(5500, 'Bonus H');
+-- Job 2
+('UX Designer', 
+'Designify is hiring a UX designer to craft delightful user experiences.', 
+'Bangalore, India', 80000, 'full-time', 2, 2, 3),
 
+-- Job 3
+('Marketing Executive', 
+'We need a dynamic marketer to lead social media campaigns.', 
+'Mumbai, India', 65000, 'part-time', 2, 2, 2),
 
-INSERT INTO Vehicle (parking_id, location_id, vehicle_type) VALUES
-('HR26-AS-1342', 1, 'Car'),
-('HP07-AF-1352', 2, 'Bike'),
-('HR05-AS-1442', 3, 'Car'),
-('RJ65-PS-0001', 4, 'SUV'),
-('RJ65-BS-1342', 5, 'Car'),
-('HR04-AK-1148', 6, 'Scooter'),
-('PB65-KF-4586', 7, 'Car'),
-('HR26-AS-1302', 1, 'Bike');
+-- Job 4
+('Data Scientist Intern', 
+'Analyze large datasets and assist in building predictive models.', 
+'Remote', 40000, 'internship', 1, 1, 4);
 
-INSERT INTO Employee (name, department_id, salary, insentive_id, joining_date, DOB, vehicle_id) VALUES
-('Rajat', 1, 150000, 1, '2012-02-02', '1987-08-19', 'HR26-AS-1342'),
-('Salesh', 2, 14000, 2, '2000-02-02', '1971-08-29', 'HP07-AF-1352'),
-('Monika', 2, 10000, 3, '2019-08-09', '1995-05-19', 'HR05-AS-1442'),
-('Malhan', 3, 152000, 4, '2022-12-20', '1986-08-09', 'RJ65-PS-0001'),
-('Gorav', 3, 10000, 5, '2005-09-21', '1997-11-19', 'RJ65-BS-1342'),
-('Pintu', 3, 12500, 6, '2017-05-21', '1987-08-19', 'HR04-AK-1148'),
-('Bismillah Mohmaad Akdas', 7, 150000, 1, '2011-01-17', '2000-08-19', 'PB65-KF-4586'),
-('Shekhar', 4, 150000, 8, '2012-02-02', '2005-08-19', 'HR26-AS-1302');
-
--- fetch employee department
-select e.name, d.department_name from Employee as e left join department as d on e.department_id = d.department_id 
-
--- fetch building that is not allocated to any department
-select name as building, dept_id as department from location where dept_id is null;
-
--- count no of employee from each department
-select department_name, count(employee_id) as Employees from Employee inner join  department on employee.department_id = department.department_id group by department_name;
+-- Insert job applications
+INSERT INTO Applications (job_id, user_id, cover_letter, resume_link, status) VALUES
+(1, 3, 'I have 4 years of experience in full-stack web development.', 'https://drive.example.com/bob_resume.pdf', 'applied'),
+(2, 5, 'UX and UI are my strengths. I’d love to contribute at Designify.', 'https://drive.example.com/ethan_resume.pdf', 'interview'),
+(3, 4, 'Marketing has always been my passion. I bring energy and strategy.', 'https://drive.example.com/sara_resume.pdf', 'reviewing'),
+(4, 3, 'As a developer, I am keen to explore data science during this internship.', 'https://drive.example.com/bob_resume.pdf', 'applied');
